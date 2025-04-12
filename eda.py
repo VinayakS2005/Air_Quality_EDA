@@ -22,3 +22,17 @@ plt.ylabel('Average PM2.5 Level')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
+# PM10 analysis
+pm10_df = df[['year', 'pm10']].dropna()
+pm10_df = pm10_df[pm10_df['year'] >= 2000]
+pm10_avg = pm10_df.groupby('year', as_index=False)['pm10'].mean()
+
+# Plotting PM10 trend from 2000 onwards
+plt.figure(figsize=(10, 5))
+sns.lineplot(data=pm10_avg, x='year', y='pm10', label='PM10', color='orange')
+plt.title('Average PM10 Trend Over Time (2000 Onwards)')
+plt.xlabel('Year')
+plt.ylabel('Average PM10 Level')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()

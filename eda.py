@@ -80,3 +80,22 @@ plt.tight_layout()
 plt.suptitle("Individual Pollutant Level Distributions (0–100)", fontsize=18, y=1.02)
 plt.show()
 
+# Box plot for pollutant distribution comparison
+plt.figure(figsize=(12, 6))
+sns.boxplot(
+    x='Pollutant',
+    y='Level',
+    data=melted_df,
+    palette='Set2',
+    linewidth=2,
+    fliersize=3,
+    boxprops=dict(alpha=0.7)
+)
+plt.title('Pollutant Distribution - Boxplot', fontsize=16, fontweight='bold')
+plt.xlabel('Pollutant', fontsize=12)
+plt.ylabel('Pollutant Level')
+plt.xticks(fontsize=10)
+plt.yticks(fontsize=10)
+plt.grid(True, linestyle='--', alpha=0.3)
+plt.tight_layout()
+plt.show()

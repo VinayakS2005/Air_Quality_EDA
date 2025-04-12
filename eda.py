@@ -99,3 +99,15 @@ plt.yticks(fontsize=10)
 plt.grid(True, linestyle='--', alpha=0.3)
 plt.tight_layout()
 plt.show()
+pollutant_tempcov_columns = ['pm10_tempcov', 'pm25_tempcov', 'no2_tempcov']
+
+df_tempcov = df[pollutant_tempcov_columns].dropna()
+
+correlation_matrix = df_tempcov.corr()
+
+# Plotting the correlation heatmap
+plt.figure(figsize=(8, 6))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5, fmt=".2f", cbar_kws={'shrink': 0.8})
+plt.title('Correlation Matrix for pm10_tempcov, pm25_tempcov, and no2_tempcov')
+plt.tight_layout()
+plt.show()

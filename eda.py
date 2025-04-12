@@ -36,3 +36,47 @@ plt.ylabel('Average PM10 Level')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
+
+# Plotting Histogram with KDE for each pollutant
+plt.figure(figsize=(12, 6))
+sns.histplot(
+    data=melted_df,
+    x='Level',
+    hue='Pollutant',
+    kde=True,
+    element='step',
+    stat='density',
+    common_norm=False
+)
+plt.title('Distribution of Pollutant Levels (0–100)')
+plt.xlabel('Pollutant Level')
+plt.ylabel('Density')
+plt.xlim(0, 100)
+plt.tight_layout()
+plt.show()
+
+# Subplots for individual pollutant distributions (Histograms with KDE)
+plt.figure(figsize=(16, 12))
+for i, pollutant in enumerate(available_pollutants, 1):
+    plt.subplot(3, 2, i)  # Adjust if more pollutants
+    sns.histplot(
+        data=df[df[pollutant] <= 100],  # Filter values between 0 and 100
+        x=pollutant,
+        kde=True,
+        bins=30,
+        color=sns.color_palette("husl")[i - 1],
+        stat="frequency",
+        element="step",
+        fill=True,
+        alpha=0.5,
+        linewidth=1.5
+    )
+    plt.title(f'{pollutant.upper()} Distribution', fontsize=14)
+    plt.xlabel('Level')
+    plt.ylabel('Frequency')
+    plt.grid(True, linestyle='--', linewidth=0.5, alpha=0.7)
+
+plt.tight_layout()
+plt.suptitle("Individual Pollutant Level Distributions (0–100)", fontsize=18, y=1.02)
+plt.show()
+
